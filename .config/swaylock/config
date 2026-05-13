@@ -1,0 +1,41 @@
+# This prevents you from seeing any sort of key strokes
+# no-unlock-indicator
+
+# Lockscreen background photo
+image=/home/danil/Pictures/wallpapers/blurred-lake-twilight.jpg
+scaling=fill
+
+# Text
+font="JetBrainsMono Nerd Font"
+font-size=40
+text-color=c0caf5ff
+
+# Adjust the size and position of the indicator ring
+indicator-radius=105
+indicator-thickness=10
+indicator-idle-visible
+# indicator-x-position=100
+# indicator-y-position=100
+
+# Core colors (Tokyo Night)
+inside-color=1a1b26cc
+ring-color=7aa2f7ff
+line-color=7dcfffcc
+separator-color=00000000
+
+# Typing highlights
+key-hl-color=e0af68ff
+bs-hl-color=ff9e64ff
+
+# Success state
+inside-ver-color=9ece6acc
+ring-ver-color=9ece6aff
+text-ver-color=9ece6aff
+
+# Failure state
+inside-wrong-color=f7768ecc
+ring-wrong-color=f7768eff
+text-wrong-color=f7768eff
+
+# Is capslock on?
+indicator-caps-lock

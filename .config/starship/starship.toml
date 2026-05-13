@@ -1,0 +1,101 @@
+add_newline = true
+command_timeout = 2000
+
+format = """$env_var$os$username$hostname$kubernetes$docker_context$directory$git_branch$git_status$python$golang$c$lua
+$character
+"""
+
+[character]
+success_symbol = "[╰⎯](white)"
+error_symbol = "[╰⎯](white)"
+
+[env_var]
+symbol = "╭╴"
+variable = 'SHELL'
+format = "$symbol"
+disabled = false
+
+[os]
+format = '[$symbol](#89b4fa) '  # Light Blue
+disabled = false
+
+[os.symbols]
+Windows = ' '
+Arch = ''
+Fedora = ''
+Ubuntu = ''
+Macos = '󰀵'
+Unknown = '󰠥'
+
+[username]
+style_user = '#f2cdcd bold'  # Flamingo
+style_root = '#f38ba8 bold'  # Red
+format = '[//](white) [$user]($style) '
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = '[//](white) [$hostname](#94e2d5 bold) '  # Teal
+disabled = false
+
+[directory]
+truncation_length = 0
+truncation_symbol = '…/'
+home_symbol = '~'
+read_only = '  '
+format = '[//](white) [$path]($style)[$read_only]($read_only_style) '
+style = '#89b4fa'  # Blue
+read_only_style = '#f38ba8'  # Red
+
+[git_branch]
+symbol = ' '
+format = '[//](white) [$symbol\[$branch\]]($style) '
+style = '#a6e3a1'  # Green
+
+[git_status]
+disabled = true
+format = '[ $all_status $ahead_behind]($style) '
+style = '#a6e3a1'  # Green
+conflicted = '🏳'
+up_to_date = ''
+untracked = ' '
+ahead = '⇡${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+behind = '⇣${count}'
+stashed = ' '
+modified = ' '
+staged = '[++\($count\)](green)'
+renamed = '襁 '
+deleted = ' '
+
+[kubernetes]
+format = 'via [󱃾 $context\($namespace\)](#f2cdcd bold) '  # Flamingo
+disabled = false
+
+[docker_context]
+format = 'via [ $context\($namespace\)](#f2cdcd bold) '  # Flamingo
+disabled = false
+detect_files = ['Dockerfile', 'docker-compose.yml', 'docker-compose.yaml']
+
+[python]
+symbol = '󰌠'
+python_binary = ['./venv/bin/python', 'python', 'python3', 'python2']
+format = '[//](white) [${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )]($style) '
+style = '#f9e2af'  # Yellow
+
+[golang]
+symbol = ''
+style = '#cba6f7'  # Purple
+format = '[//](white) [${symbol} ${version}]($style) '
+disabled = false
+
+[c]
+symbol = ''
+style = '#74c7ec'  # Saphire
+format = '[//](white) [${symbol} ${version}]($style) '
+
+[lua]
+symbol = ''
+style = '#b4befe'  # Rosewater
+format = '[//](white) [${symbol} ${version}]($style) '
