@@ -20,7 +20,7 @@ format = '[$symbol](#89b4fa) '  # Light Blue
 disabled = false
 
 [os.symbols]
-Windows = ' '
+Windows = ''
 Arch = ''
 Fedora = ''
 Ubuntu = ''
@@ -59,23 +59,23 @@ format = '[ $all_status $ahead_behind]($style) '
 style = '#a6e3a1'  # Green
 conflicted = '🏳'
 up_to_date = ''
-untracked = ' '
+untracked = ''
 ahead = '⇡${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 behind = '⇣${count}'
-stashed = ' '
-modified = ' '
+stashed = ''
+modified = ''
 staged = '[++\($count\)](green)'
-renamed = '襁 '
-deleted = ' '
+renamed = '襁'
+deleted = ''
 
 [kubernetes]
-format = 'via [󱃾 $context\($namespace\)](#f2cdcd bold) '  # Flamingo
 disabled = false
+format = 'via [󱃾 $context\($namespace\)](#f2cdcd bold) '  # Flamingo
 
 [docker_context]
-format = 'via [ $context\($namespace\)](#f2cdcd bold) '  # Flamingo
 disabled = false
+format = 'via [ $context\($namespace\)](#f2cdcd bold) '  # Flamingo
 detect_files = ['Dockerfile', 'docker-compose.yml', 'docker-compose.yaml']
 
 [python]
