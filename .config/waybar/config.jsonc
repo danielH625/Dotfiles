@@ -1,0 +1,113 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 35,
+  "margin-top": 2,
+  "margin-left": 12,
+  "margin-right": 12,
+  "spacing": 6,
+
+  "modules-left": [
+    "custom/launcher",
+    "niri/workspaces"
+    // "niri/window"
+  ],
+
+  "modules-center": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "cpu",
+    "memory",
+    "network",
+    "pulseaudio",
+    "battery",
+    "tray"
+  ],
+
+  "custom/launcher": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "fuzzel"
+  },
+
+  "niri/workspaces": {
+    "format": "{icon}",
+    "all-outputs": true,
+    "format-icons": {
+      "active": "",
+      "default": ""
+    }
+  },
+
+  // "niri/window": {
+  //   "format": "{}",
+  //   "max-length": 40,
+  //   "separate-outputs": true
+  // },
+
+  "clock": {
+    "format": "󰥔  {:%I:%M %p}",
+    "tooltip-format": "{:%A, %B %d %Y}",
+    "interval": 1
+  },
+
+  "cpu": {
+    "format": "  {usage}%",
+    "tooltip": false
+  },
+
+  "memory": {
+    "format": "󰍛  {}%",
+    "tooltip": false
+  },
+
+  "network": {
+    "format-wifi": "󰖩  {signalStrength}%",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰖪",
+    "tooltip": false,
+    "on-click": "pywifi"
+  },
+
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "󰖁",
+    "format-icons": {
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾"
+      ]
+    },
+    "tooltip": false
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}  {capacity}%",
+    "format-icons": [
+      "󰂎",
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
+    "tooltip": false
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  }
+}
