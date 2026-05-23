@@ -9,4 +9,5 @@ wk.add({
 	{ "<leader>f", group = "Find" },
 	{ "<leader>l", group = "LSP" },
 	{ "<leader>g", group = "GIT" },
+	{ "<leader>n", group = "Notifications" },
 })

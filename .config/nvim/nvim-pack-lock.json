@@ -29,6 +29,14 @@
       "rev": "9d359222b3643f1fccbd8f3180445842e1cae00b",
       "src": "https://www.github.com/echasnovski/mini.nvim"
     },
+    "noice.nvim": {
+      "rev": "7bfd942445fb63089b59f97ca487d605e715f155",
+      "src": "https://github.com/folke/noice.nvim"
+    },
+    "nui.nvim": {
+      "rev": "de740991c12411b663994b2860f1a4fd0937c130",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
     "nvim-dap": {
       "rev": "45a69eba683a2c448dd9ecfc4de89511f0646b5f",
       "src": "https://github.com/mfussenegger/nvim-dap"
@@ -56,6 +64,10 @@
     "nvim-treesitter": {
       "rev": "5cb05e1b0fa3c469958a2b26f36b3fe930af221c",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "snacks.nvim": {
+      "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
+      "src": "https://github.com/folke/snacks.nvim"
     },
     "tokyonight.nvim": {
       "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",

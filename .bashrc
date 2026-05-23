@@ -38,6 +38,15 @@ function cl() {
   cd "$1" && ls -la
 }
 
+export EDITOR=nvim
+
+# Ctrl-T to fuzzy find files and paste into command line
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
+# Ctrl-R for better history search
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap"
+# Alt-C to cd into subdirectories
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
+
 # -----------
 # ALIASES
 # -----------
