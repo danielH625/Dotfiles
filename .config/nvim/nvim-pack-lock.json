@@ -9,9 +9,9 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
-    "efmls-configs-nvim": {
-      "rev": "0b0ca5462a0a9c1233cc8359e64741d7d49fbbe4",
-      "src": "https://github.com/creativenull/efmls-configs-nvim"
+    "conform.nvim": {
+      "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
+      "src": "https://github.com/stevearc/conform.nvim"
     },
     "fzf-lua": {
       "rev": "30ba09afbc0eac5fc5ec8823418d1e45d0712b9f",
@@ -64,6 +64,10 @@
     "nvim-treesitter": {
       "rev": "5cb05e1b0fa3c469958a2b26f36b3fe930af221c",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "oil.nvim": {
+      "rev": "b91ee5a77a6a9605d9c1aaf4fda74b66082c8297",
+      "src": "https://github.com/stevearc/oil.nvim"
     },
     "snacks.nvim": {
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",

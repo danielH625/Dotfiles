@@ -61,6 +61,35 @@ local function lsp_on_attach(ev)
 	end
 
 	-- ============================================================================
+	-- Linters & Formatters & Languages
+	-- ============================================================================
+
+	vim.lsp.config("lua_ls", {
+		settings = {
+			Lua = {
+				diagnostics = { globals = { "vim" } },
+				telemetry = { enable = false },
+			},
+		},
+	})
+	vim.lsp.config("pyright", {})
+	vim.lsp.config("ruff", {})
+	vim.lsp.config("bashls", {})
+	vim.lsp.config("ts_ls", {})
+	vim.lsp.config("gopls", {})
+	vim.lsp.config("clangd", {})
+
+	vim.lsp.enable({
+		"lua_ls",
+		"pyright",
+		"ruff",
+		"bashls",
+		"ts_ls",
+		"gopls",
+		"clangd",
+	})
+
+	-- ============================================================================
 	-- LSP: Navigation
 	-- ============================================================================
 
@@ -134,7 +163,7 @@ local function lsp_on_attach(ev)
 				bufnr = bufnr,
 			})
 			vim.defer_fn(function()
-				vim.lsp.buf.format({ bufnr = bufnr })
+				require("conform").format({ bufnr = bufnr })
 			end, 50)
 		end, "Organize Imports")
 	end
@@ -159,7 +188,7 @@ require("blink.cmp").setup({
 		["<CR>"] = { "accept", "fallback" },
 		["<C-j>"] = { "select_next", "fallback" },
 		["<C-k>"] = { "select_prev", "fallback" },
-		["<Tab>"] = { "accept", "snippet_forward", "fallback" },
+		["<Tab>"] = { "snippet_forward", "fallback" },
 		["<S-Tab>"] = { "snippet_backward", "fallback" },
 	},
 	appearance = { nerd_font_variant = "mono" },
@@ -180,97 +209,3 @@ require("blink.cmp").setup({
 vim.lsp.config["*"] = {
 	capabilities = require("blink.cmp").get_lsp_capabilities(),
 }
-
--- ============================================================================
--- Linters & Formatters & Languages
--- ============================================================================
-
-vim.lsp.config("lua_ls", {
-	settings = {
-		Lua = {
-			diagnostics = { globals = { "vim" } },
-			telemetry = { enable = false },
-		},
-	},
-})
-vim.lsp.config("pyright", {})
-vim.lsp.config("bashls", {})
-vim.lsp.config("ts_ls", {})
-vim.lsp.config("gopls", {})
-vim.lsp.config("clangd", {})
-
-do
-	local luacheck = require("efmls-configs.linters.luacheck")
-	local stylua = require("efmls-configs.formatters.stylua")
-
-	local ruff = require("efmls-configs.linters.ruff")
-	local ruff_format = require("efmls-configs.formatters.ruff")
-
-	local prettier_d = require("efmls-configs.formatters.prettier_d")
-	local eslint_d = require("efmls-configs.linters.eslint_d")
-
-	local fixjson = require("efmls-configs.formatters.fixjson")
-
-	local shellcheck = require("efmls-configs.linters.shellcheck")
-	local shfmt = require("efmls-configs.formatters.shfmt")
-
-	local cpplint = require("efmls-configs.linters.cpplint")
-	local clangfmt = require("efmls-configs.formatters.clang_format")
-
-	local go_revive = require("efmls-configs.linters.go_revive")
-	local gofumpt = require("efmls-configs.formatters.gofumpt")
-
-	vim.lsp.config("efm", {
-		filetypes = {
-			"c",
-			"cpp",
-			"css",
-			"go",
-			"html",
-			"javascript",
-			"javascriptreact",
-			"json",
-			"jsonc",
-			"lua",
-			"markdown",
-			"python",
-			"sh",
-			"typescript",
-			"typescriptreact",
-			"vue",
-			"svelte",
-		},
-		init_options = { documentFormatting = true },
-		settings = {
-			languages = {
-				c = { clangfmt, cpplint },
-				go = { gofumpt, go_revive },
-				cpp = { clangfmt, cpplint },
-				css = { prettier_d },
-				html = { prettier_d },
-				javascript = { eslint_d, prettier_d },
-				javascriptreact = { eslint_d, prettier_d },
-				json = { eslint_d, fixjson },
-				jsonc = { eslint_d, fixjson },
-				lua = { luacheck, stylua },
-				markdown = { prettier_d },
-				python = { ruff, ruff_format },
-				sh = { shellcheck, shfmt },
-				typescript = { eslint_d, prettier_d },
-				typescriptreact = { eslint_d, prettier_d },
-				vue = { eslint_d, prettier_d },
-				svelte = { eslint_d, prettier_d },
-			},
-		},
-	})
-end
-
-vim.lsp.enable({
-	"lua_ls",
-	"pyright",
-	"bashls",
-	"ts_ls",
-	"gopls",
-	"clangd",
-	"efm",
-})

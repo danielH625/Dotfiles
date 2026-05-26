@@ -109,6 +109,16 @@ window#waybar {
   color: #a6e3a1;
 }
 
+#battery.charging {
+  color: #39ff14;
+}
+
+#batter.warning,
+#battery.critical,
+#battery.urgent {
+  color: #ffff00;
+}
+
 #tray {
   padding-right: 16px;
   padding-left: 16px;

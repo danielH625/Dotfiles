@@ -10,6 +10,7 @@ vim.pack.add({
 	"https://github.com/folke/snacks.nvim",
 	"https://github.com/folke/noice.nvim",
 	"https://github.com/MunifTanjim/nui.nvim",
+	"https://github.com/stevearc/oil.nvim",
 	{
 		src = "https://github.com/nvim-treesitter/nvim-treesitter",
 		branch = "main",
@@ -18,7 +19,7 @@ vim.pack.add({
 	-- Language Server Protocols
 	"https://www.github.com/neovim/nvim-lspconfig",
 	"https://github.com/mason-org/mason.nvim",
-	"https://github.com/creativenull/efmls-configs-nvim",
+	"https://github.com/stevearc/conform.nvim",
 	{
 		src = "https://github.com/saghen/blink.cmp",
 		version = vim.version.range("1.*"),
@@ -43,15 +44,16 @@ packadd("fzf-lua")
 packadd("snacks.nvim")
 packadd("noice.nvim")
 packadd("nui.nvim")
+packadd("oil.nvim")
 -- LSP
 packadd("nvim-lspconfig")
 packadd("mason.nvim")
-packadd("efmls-configs-nvim")
 packadd("blink.cmp")
 packadd("LuaSnip")
+packadd("conform.nvim")
 -- Debug
 packadd("nvim-dap")
 packadd("nvim-dap-python")
 packadd("nvim-dap-ui")
 packadd("nvim-dap-virtual-text")
-packadd("nvim-nio")
+-- packadd("nvim-nio")

@@ -10,4 +10,6 @@ wk.add({
 	{ "<leader>l", group = "LSP" },
 	{ "<leader>g", group = "GIT" },
 	{ "<leader>n", group = "Notifications" },
+	{ "<leader>t", group = "Tabs" },
+	{ "<leader>b", group = "Buffers" },
 })
