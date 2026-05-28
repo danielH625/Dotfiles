@@ -1,22 +1,60 @@
-local fzf = require("fzf-lua")
+return {
+	"ibhagwan/fzf-lua",
+	dependencies = { "nvim-mini/mini.icons" },
+	---@module "fzf-lua"
+	---@type fzf-lua.Config|{}
+	---@diagnostic disable: missing-fields
+	---@diagnostic enable: missing-fields
+	opts = {
+		winopts = {
+			height = 0.85,
+			width = 0.80,
+			backdrop = 100,
+		},
+	},
 
-fzf.setup({})
-
-vim.keymap.set("n", "<leader>ff", function()
-	fzf.files()
-end, { desc = "FZF Files" })
-vim.keymap.set("n", "<leader>fg", function()
-	fzf.live_grep()
-end, { desc = "FZF Live Grep" })
-vim.keymap.set("n", "<leader>fb", function()
-	fzf.buffers()
-end, { desc = "FZF Buffers" })
-vim.keymap.set("n", "<leader>fh", function()
-	fzf.help_tags()
-end, { desc = "FZF Help Tags" })
-vim.keymap.set("n", "<leader>fx", function()
-	fzf.diagnostics_document()
-end, { desc = "FZF Diagnostics Document" })
-vim.keymap.set("n", "<leader>fX", function()
-	fzf.diagnostics_workspace()
-end, { desc = "FZF Diagnostics Workspace" })
+	keys = {
+		{
+			"<leader>ff",
+			function()
+				require("fzf-lua").files()
+			end,
+			desc = "Find Files",
+		},
+		{
+			"<leader>fg",
+			function()
+				require("fzf-lua").live_grep()
+			end,
+			desc = "Live Grep",
+		},
+		{
+			"<leader>fb",
+			function()
+				require("fzf-lua").buffers()
+			end,
+			desc = "Buffers",
+		},
+		{
+			"<leader>fh",
+			function()
+				require("fzf-lua").help_tags()
+			end,
+			desc = "Help Tags",
+		},
+		{
+			"<leader>fx",
+			function()
+				require("fzf-lua").diagnostics_document()
+			end,
+			desc = "Diagnostics (Document)",
+		},
+		{
+			"<leader>fX",
+			function()
+				require("fzf-lua").diagnostics_workspace()
+			end,
+			desc = "Diagnostics (Workspace)",
+		},
+	},
+}

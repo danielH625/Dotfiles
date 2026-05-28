@@ -1,89 +1,107 @@
-local Snacks = require("snacks")
+return {
+	"folke/snacks.nvim",
+	priority = 1000,
+	lazy = false,
 
-Snacks.setup({
-	terminal = { enabled = true },
-	lazygit = { enabled = true },
-	notifier = {
-		enabled = true,
-		timeout = 3000,
-		style = "fancy",
-		top_down = true,
-		icons = {
-			error = " ",
-			warn = " ",
-			info = " ",
-			debug = " ",
-			trace = " ",
+	opts = {
+		terminal = { enabled = true },
+		lazygit = { enabled = true },
+
+		notifier = {
+			enabled = true,
+			timeout = 3000,
+			style = "fancy",
+			top_down = true,
+			icons = {
+				error = " ",
+				warn = " ",
+				info = " ",
+				debug = " ",
+				trace = " ",
+			},
+		},
+
+		styles = {
+			terminal = {
+				position = "float",
+				border = "rounded",
+				backdrop = 60,
+				height = 0.8,
+				width = 0.8,
+				zindex = 50,
+				wo = {
+					winblend = 10,
+					winhighlight = "FloatBorder:MyFloatBorder,FloatTitle:MyFloatTitle",
+				},
+			},
+
+			lazygit = {
+				border = "rounded",
+				backdrop = 60,
+				height = 0.9,
+				width = 0.9,
+				zindex = 50,
+				wo = {
+					winhighlight = "FloatBorder:MyFloatBorder,FloatTitle:MyFloatTitle",
+				},
+			},
+
+			notification = {
+				border = "rounded",
+				wo = {
+					winblend = 10,
+					winhighlight = "FloatBorder:MyFloatBorder,FloatTitle:MyFloatTitle",
+				},
+			},
+
+			notification_history = {
+				border = "rounded",
+				wo = {
+					winblend = 10,
+					winhighlight = "FloatBorder:MyFloatBorder,FloatTitle:MyFloatTitle",
+				},
+			},
 		},
 	},
 
-	styles = {
-		terminal = {
-			position = "float",
-			border = "rounded",
+	config = function(_, opts)
+		require("snacks").setup(opts)
 
-			backdrop = 60,
-			height = 0.8,
-			width = 0.8,
-			zindex = 50,
+		-- imperative stuff stays here
+		vim.notify = require("snacks").notifier.notify
+	end,
 
-			wo = {
-				winblend = 10,
-
-				winhighlight = "FloatBorder:MyFloatBorder,FloatTitle:MyFloatTitle",
-			},
+	keys = {
+		{
+			"<leader>st",
+			function()
+				require("snacks").terminal()
+			end,
+			desc = "Floating terminal",
 		},
 
-		lazygit = {
-			border = "rounded",
-			backdrop = 60,
-			height = 0.9,
-			width = 0.9,
-			zindex = 50,
-
-			wo = {
-				winhighlight = "FloatBorder:MyFloatBorder,FloatTitle:MyFloatTitle",
-			},
-		},
-		notification = {
-			border = "rounded",
-
-			wo = {
-				winblend = 10,
-
-				winhighlight = "FloatBorder:MyFloatBorder,FloatTitle:MyFloatTitle",
-			},
+		{
+			"<leader>sp",
+			function()
+				require("snacks").terminal("python3")
+			end,
+			desc = "Python REPL",
 		},
 
-		notification_history = {
-			border = "rounded",
+		{
+			"<leader>gl",
+			function()
+				require("snacks").lazygit()
+			end,
+			desc = "LazyGit",
+		},
 
-			wo = {
-				winblend = 10,
-
-				winhighlight = "FloatBorder:MyFloatBorder,FloatTitle:MyFloatTitle",
-			},
+		{
+			"<leader>nh",
+			function()
+				require("snacks").notifier.show_history()
+			end,
+			desc = "Notification History",
 		},
 	},
-})
-
-vim.notify = Snacks.notifier.notify
-
-vim.keymap.set("n", "<leader>st", function()
-	Snacks.terminal()
-end, { desc = "Floating terminal" })
-
-vim.keymap.set("n", "<leader>sp", function()
-	Snacks.terminal("python3")
-end, { desc = "Floating Python3 REPL" })
-
-vim.keymap.set("n", "<leader>gl", function()
-	Snacks.lazygit()
-end, { desc = "Open lazygit" })
-
-vim.keymap.set("n", "<leader>nh", function()
-	Snacks.notifier.show_history()
-end, { desc = "Notification History" })
--- vim.keymap.set("n", "<leader>nd", function()
--- 	Snacks.notifier.hide()
--- end, { desc = "Dismiss All Notifications" })
+}

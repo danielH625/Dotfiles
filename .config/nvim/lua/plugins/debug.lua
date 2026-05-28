@@ -1,129 +1,150 @@
-local dap = require("dap")
-local dapui = require("dapui")
-local dapuiwidgets = require("dap.ui.widgets")
-local dap_python = require("dap-python")
+return {
+	{
+		"mfussenegger/nvim-dap",
 
--- ============================================================================
--- DAP UI
--- ============================================================================
+		dependencies = {
+			"rcarriga/nvim-dap-ui",
+			"theHamsta/nvim-dap-virtual-text",
+			"mfussenegger/nvim-dap-python",
+			"nvim-neotest/nvim-nio",
+		},
 
-dapui.setup({})
+		keys = {
+			{ "<leader>dc", desc = "Debug Continue" },
+			{ "<leader>di", desc = "Step Into" },
+			{ "<leader>dn", desc = "Step Over" },
+			{ "<leader>do", desc = "Step Out" },
+			{ "<leader>db", desc = "Toggle Breakpoint" },
+			{ "<leader>du", desc = "Toggle DAP UI" },
+		},
 
-require("nvim-dap-virtual-text").setup({
-	commented = true,
-})
+		cmd = {
+			"DapContinue",
+			"DapToggleBreakpoint",
+			"DapStepInto",
+			"DapStepOver",
+			"DapStepOut",
+			"DapTerminate",
+			"DapRestart",
+		},
 
--- ============================================================================
--- PYTHON DEBUGGER
--- ============================================================================
-dap_python.setup("python3")
+		config = function()
+			local dap = require("dap")
+			local dapui = require("dapui")
+			local widgets = require("dap.ui.widgets")
+			local dap_python = require("dap-python")
 
--- ============================================================================
--- BREAKPOINT SIGNS
--- ============================================================================
+			-- ============================================================
+			-- UI
+			-- ============================================================
 
-vim.fn.sign_define("DapBreakpoint", {
-	text = "",
-	texthl = "DiagnosticSignError",
-	linehl = "",
-	numhl = "",
-})
+			dapui.setup()
 
-vim.fn.sign_define("DapBreakpointRejected", {
-	text = "",
-	texthl = "DiagnosticSignError",
-	linehl = "",
-	numhl = "",
-})
+			require("nvim-dap-virtual-text").setup({
+				commented = true,
+			})
 
-vim.fn.sign_define("DapStopped", {
-	text = "",
-	texthl = "DiagnosticSignWarn",
-	linehl = "Visual",
-	numhl = "DiagnosticSignWarn",
-})
+			-- ============================================================
+			-- Python
+			-- ============================================================
 
--- ============================================================================
--- AUTO OPEN/CLOSE DAP UI
--- ============================================================================
+			dap_python.setup("python3")
 
-dap.listeners.after.event_initialized["dapui_config"] = function()
-	dapui.open()
-end
+			-- ============================================================
+			-- Signs
+			-- ============================================================
 
--- dap.listeners.before.event_terminated["dapui_config"] = function()
--- 	dapui.close()
--- end
---
--- dap.listeners.before.event_exited["dapui_config"] = function()
--- 	dapui.close()
--- end
+			vim.fn.sign_define("DapBreakpoint", {
+				text = "",
+				texthl = "DiagnosticSignError",
+			})
 
--- ============================================================================
--- KEYMAPS
--- ============================================================================
-local function map(lhs, rhs, desc)
-	vim.keymap.set("n", lhs, rhs, {
-		noremap = true,
-		silent = true,
-		desc = desc,
-	})
-end
+			vim.fn.sign_define("DapBreakpointRejected", {
+				text = "",
+				texthl = "DiagnosticSignError",
+			})
 
-local function vmap(lhs, rhs, desc)
-	vim.keymap.set({ "n", "v" }, lhs, rhs, {
-		noremap = true,
-		silent = true,
-		desc = desc,
-	})
-end
+			vim.fn.sign_define("DapStopped", {
+				text = "",
+				texthl = "DiagnosticSignWarn",
+				linehl = "Visual",
+				numhl = "DiagnosticSignWarn",
+			})
 
--- ============================================================================
--- Debug Controls
--- ============================================================================
+			-- ============================================================
+			-- Auto open UI
+			-- ============================================================
 
-map("<leader>dc", dap.continue, "Continue / Start")
-map("<leader>di", dap.step_into, "Step Into")
-map("<leader>dn", dap.step_over, "Step Over")
-map("<leader>do", dap.step_out, "Step Out")
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				dapui.open()
+			end
 
-map("<leader>dr", dap.restart, "Restart")
-map("<leader>dq", dap.terminate, "Terminate")
-map("<leader>dd", dap.disconnect, "Disconnect")
+			-- Uncomment if you want auto-close:
+			--
+			-- dap.listeners.before.event_terminated["dapui_config"] = function()
+			--   dapui.close()
+			-- end
+			--
+			-- dap.listeners.before.event_exited["dapui_config"] = function()
+			--   dapui.close()
+			-- end
 
--- ============================================================================
--- Breakpoints
--- ============================================================================
+			-- ============================================================
+			-- Keymaps
+			-- ============================================================
 
-map("<leader>db", dap.toggle_breakpoint, "Toggle Breakpoint")
+			local map = vim.keymap.set
 
-map("<leader>dB", function()
-	dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-end, "Conditional Breakpoint")
+			-- Debug controls
+			map("n", "<leader>dc", dap.continue, { desc = "Continue / Start" })
+			map("n", "<leader>di", dap.step_into, { desc = "Step Into" })
+			map("n", "<leader>dn", dap.step_over, { desc = "Step Over" })
+			map("n", "<leader>do", dap.step_out, { desc = "Step Out" })
 
--- (🔥 Bonus: logpoint — VERY useful)
-map("<leader>dl", function()
-	dap.set_breakpoint(nil, nil, vim.fn.input("Log message: "))
-end, "Logpoint")
+			map("n", "<leader>dr", dap.restart, { desc = "Restart" })
+			map("n", "<leader>dq", dap.terminate, { desc = "Terminate" })
+			map("n", "<leader>dd", dap.disconnect, { desc = "Disconnect" })
 
--- ============================================================================
--- UI
--- ============================================================================
+			-- Breakpoints
+			map("n", "<leader>db", dap.toggle_breakpoint, {
+				desc = "Toggle Breakpoint",
+			})
 
-map("<leader>du", dapui.toggle, "Toggle UI")
+			map("n", "<leader>dB", function()
+				dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+			end, {
+				desc = "Conditional Breakpoint",
+			})
 
-map("<leader>ds", function()
-	dapuiwidgets.centered_float(dapuiwidgets.scopes)
-end, "Preview Scopes")
+			map("n", "<leader>dl", function()
+				dap.set_breakpoint(nil, nil, vim.fn.input("Log message: "))
+			end, {
+				desc = "Logpoint",
+			})
 
--- ============================================================================
--- Eval / Watches
--- ============================================================================
+			-- UI
+			map("n", "<leader>du", dapui.toggle, {
+				desc = "Toggle Debug UI",
+			})
 
-vmap("<leader>de", function()
-	dapui.eval()
-end, "Eval Expression")
+			map("n", "<leader>ds", function()
+				widgets.centered_float(widgets.scopes)
+			end, {
+				desc = "Preview Scopes",
+			})
 
-vmap("<leader>dw", function()
-	dapui.eval(nil, { enter = true })
-end, "Add Watch")
+			-- Eval / Watches
+			map({ "n", "v" }, "<leader>de", function()
+				dapui.eval()
+			end, {
+				desc = "Eval Expression",
+			})
+
+			map({ "n", "v" }, "<leader>dw", function()
+				dapui.eval(nil, { enter = true })
+			end, {
+				desc = "Add Watch",
+			})
+		end,
+	},
+}
